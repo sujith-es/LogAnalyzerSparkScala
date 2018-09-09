@@ -14,7 +14,7 @@ class TransformMapper {
   }
 
   def transformDate(events: RDD[LogSchema], outPath: String) = {
-    val e = events.map(x => (x.datetime, 1)).reduceByKey(_ + _)
+    val e = events.map(x => (x.datetime, 1)).reduceByKey(_ + _).sortByKey(false)
     e.saveAsTextFile(outPath)
   }
 
